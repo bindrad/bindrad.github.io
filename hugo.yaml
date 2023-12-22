@@ -135,8 +135,8 @@ params:
     button:
       enable: true
       name: "Resume"
-      url: "https://github.com/ddbindra/ddbindra.github.io/blob/master/assets/resume.pdf"
-      download: true
+      url: "/resume.pdf"
+      download: false
       newPage: true
     socialLinks:
       fontAwesomeIcons:
