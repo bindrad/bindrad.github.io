@@ -302,7 +302,7 @@ params:
     # title: "Custom Name"
     items:
       - title: Movie Recommendation System
-        content: A highly customizable and mobile first Hugo template for personal portfolio and blog.
+        content: Architected collaborative recommender system using cosine similarity algorithm.
         image: /images/recommendation_system.png
         # featured:
         #   name: Demo
