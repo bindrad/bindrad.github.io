@@ -54,8 +54,8 @@ Menus:
     #   weight: 2
 
 params:
-  title: "Dhruv Bindra"
-  description: Dhruv Bindra's cool Portfolio website
+  title: "Dhruv Bindra | Software Developer"
+  description: Expore Dhruv Bindra's portfolio website and discover his passion for innovation
   # staticPath: ""  # The path to serve the static files from
   favicon: "/images/logo.png"
 
@@ -107,7 +107,7 @@ params:
     align: ms-auto # Left: ms-auto | center: mx-auto | right: me-auto | Default: ms-auto
     # brandLogo: "/logo.png" # Logo for the brand | default is the favicon variable
     # showBrandLogo: false # Show brand logo in nav bar | default is true
-    brandName: "Dhruv Bindra" # Brand name for the brand | default is the title variable
+    brandName: "Dhruv Bindra | Software Developer" # Brand name for the brand | default is the title variable
     disableSearch: true
     # searchPlaceholder: "Search"
     stickyNavBar:
