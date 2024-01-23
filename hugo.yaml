@@ -225,7 +225,7 @@ params:
           enable: true
           content: I started as an intern, received full-time offer to work as Associate Software Engineer and I was promoted to Software Engineer within a year.
         content: |
-          I was working as a software engineer at [Red Hat.](https://www.redhat.com/en).
+          I was working as a software engineer at [Red Hat.](https://www.redhat.com/en)
 
           - Built an OpenShift/Kubernetes Operator for Red Hat OpenShift Data Foundation - Managed Service[ODF-MS] using Operator Lifecycle Manager; this eliminated the need for clients to maintain the cloud storage admins.
           - Deploying 7+ containerized applications per day on Kubernetes/OpenShift to develop the ODF-MS while gaining extensive hands on experience with Docker and Kubernetes.
@@ -410,7 +410,7 @@ params:
   singlePages:
     readTime:
       enable: true
-      content: "min read"
+      content: " min read"
     scrollprogress:
       enable: true
 
