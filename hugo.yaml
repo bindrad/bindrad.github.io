@@ -25,11 +25,11 @@ markup:
 Menus:
   main:
     -
-    # - identifier: blog
-    #   name: Blog
-    #   title: Blog posts
-    #   url: /blogs
-    #   weight: 1
+    - identifier: blog
+      name: Blog
+      title: Blog posts
+      url: /blogs
+      weight: 1
     # - identifier: gallery
     #   name: Gallery
     #   title: Blog posts
@@ -404,7 +404,7 @@ params:
 
   # List pages like blogs and posts
   listPages:
-    disableFeaturedImage: true
+    disableFeaturedImage: false
 
   # Single pages like blog and post
   singlePages:

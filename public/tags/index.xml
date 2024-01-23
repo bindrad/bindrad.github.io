@@ -6,6 +6,28 @@
     <description>Recent content in Tags on Dhruv Bindra</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Mon, 22 Jan 2024 00:00:00 -0700</lastBuildDate>
     <atom:link href="https://bindrad.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Applications</title>
+      <link>https://bindrad.github.io/tags/applications/</link>
+      <pubDate>Mon, 22 Jan 2024 00:00:00 -0700</pubDate>
+      <guid>https://bindrad.github.io/tags/applications/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Containers</title>
+      <link>https://bindrad.github.io/tags/containers/</link>
+      <pubDate>Mon, 22 Jan 2024 00:00:00 -0700</pubDate>
+      <guid>https://bindrad.github.io/tags/containers/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>https://bindrad.github.io/tags/docker/</link>
+      <pubDate>Mon, 22 Jan 2024 00:00:00 -0700</pubDate>
+      <guid>https://bindrad.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

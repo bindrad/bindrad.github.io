@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Containers on Dhruv Bindra</title>
+    <link>https://bindrad.github.io/tags/containers/</link>
+    <description>Recent content in Containers on Dhruv Bindra</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 22 Jan 2024 00:00:00 -0700</lastBuildDate>
+    <atom:link href="https://bindrad.github.io/tags/containers/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Exploring Containerization: Unveiling the Core Concepts and Technologies</title>
+      <link>https://bindrad.github.io/blogs/containers/</link>
+      <pubDate>Mon, 22 Jan 2024 00:00:00 -0700</pubDate>
+      <guid>https://bindrad.github.io/blogs/containers/</guid>
+      <description>Containers have emerged as a revolutionary way to deploy applications, offering a unique approach to running software in an isolated environment. This isolation ensures that your application operates independently, safeguarding both the applications running on the host machine and the host machine itself. A container provides a contained space to your application where it is shielded from the external interference of the host machine or other applications running on host machines.</description>
+    </item>
+  </channel>
+</rss>
