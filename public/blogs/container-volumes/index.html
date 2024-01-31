@@ -28,14 +28,18 @@
 
 
 
-<meta property="og:title" content="Tags" />
-<meta property="og:description" content="Expore Dhruv Bindra&#39;s portfolio website and discover his passion for innovation" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://bindrad.github.io/tags/" /><meta property="og:site_name" content="Dhruv Bindra | Software Developer" />
+<meta property="og:title" content="From Ephemeral to Everlasting: Understanding Container Volumes" />
+<meta property="og:description" content="Containers are small, lightweight bundles containing one or more applications and their dependencies, essential for running code. The beauty of containers lies in their ability to package all necessary components, making applications highly portable.
+Why does a Container Need Persistent Storage? Containers are ephemeral, necessitating a means to store persistent data. While containers carry code, runtime, and dependencies wherever they go, they don&rsquo;t bring along application-generated data to maintain a lightweight footprint." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bindrad.github.io/blogs/container-volumes/" /><meta property="article:section" content="blogs" />
+<meta property="article:published_time" content="2024-01-30T00:00:00-07:00" />
+<meta property="article:modified_time" content="2024-01-30T00:00:00-07:00" /><meta property="og:site_name" content="Dhruv Bindra | Software Developer" />
 
 
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Tags"/>
-<meta name="twitter:description" content="Expore Dhruv Bindra&#39;s portfolio website and discover his passion for innovation"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="From Ephemeral to Everlasting: Understanding Container Volumes"/>
+<meta name="twitter:description" content="Containers are small, lightweight bundles containing one or more applications and their dependencies, essential for running code. The beauty of containers lies in their ability to package all necessary components, making applications highly portable.
+Why does a Container Need Persistent Storage? Containers are ephemeral, necessitating a means to store persistent data. While containers carry code, runtime, and dependencies wherever they go, they don&rsquo;t bring along application-generated data to maintain a lightweight footprint."/>
 
 
 <link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
@@ -98,11 +102,14 @@
     }
 </style>
 
-<meta name="description" content="Tags of Dhruv Bindra | Software Developer">
-<link rel="stylesheet" href="/css/list.css" media="all">
+<meta name="description" content="">
+<link rel="stylesheet" href="/css/single.css">
+
+
+<script defer src="/fontawesome-6/all-6.4.2.js"></script>
 
   <title>
-Tags | Dhruv Bindra | Software Developer
+From Ephemeral to Everlasting: Understanding Container Volumes | Dhruv Bindra | Software Developer
 
   </title>
 </head>
@@ -269,57 +276,179 @@ Tags | Dhruv Bindra | Software Developer
     </nav>
 </header>
 <div id="content">
-<div class="container pt-5" id="list-page">
-    <h2 class="text-center pb-2">Tags</h2>
-    <div class="row">
-        
-        <div class="col-lg-4 col-md-6 my-3">
-            <div class="card-columns">
-                <div class="card h-100">
-                    
-                    <div class="card-body bg-transparent p-4 shadow-sm">
-                        <a href="/tags/applications/" class="primary-font card-title">
-                            <h5 class="card-title bg-transparent" title="Applications">Applications</h5>
-                        </a>
-                        <div class="card-text secondary-font">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="mt-auto post-footer bg-transparent py-3">
-                        <span class="float-start bg-transparent">Jan 22, 2024</span>
-                        <a href="/tags/applications/" class="float-end btn btn-outline-info btn-sm">Read</a>
-                    </div>
-                </div>
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
+          <div class="title mb-5">
+            <h1 class="text-center mb-4">From Ephemeral to Everlasting: Understanding Container Volumes</h1>
+            <div class="text-center">
+              Dhruv Bindra 
+              <small>|</small>
+              Jan 30, 2024
+
+              
+              <span id="readingTime">
+                 min read
+              </span>
+              
             </div>
+          </div>
+          
+          <div class="featured-image">
+            <img class="img-fluid mx-auto d-block" src="/images/volumes.gif" alt="From Ephemeral to Everlasting: Understanding Container Volumes">
+          </div>
+          
+          <article class="page-content  p-2">
+          <p>Containers are small, lightweight bundles containing one or more applications and their dependencies, essential for running code. The beauty of containers lies in their ability to package all necessary components, making applications highly portable.</p>
+<h2 id="why-does-a-container-need-persistent-storage">Why does a Container Need Persistent Storage?</h2>
+<p>Containers are ephemeral, necessitating a means to store persistent data. While containers carry code, runtime, and dependencies wherever they go, they don&rsquo;t bring along application-generated data to maintain a lightweight footprint. Real-world applications, especially databases like Postgres, require data persistence. If a Postgres container generates data, it&rsquo;s crucial to retain that data even if the container is moved or restarted. This is where persistent storage becomes essential.</p>
+<h2 id="how-to-attach-a-volume-to-a-container">How to Attach a Volume to a Container?</h2>
+<p>One effective method is by utilizing Docker volumes. Volumes are specifically designed to support stateful applications, ensuring that data is stored permanently in a persistent storage solution.</p>
+<p>Let&rsquo;s demonstrate this by mounting a volume to a container and verifying the content of same volume in another container:</p>
+<p>Run a alpine container and mount volume called <mark>demo</mark> to it.</p>
+<pre tabindex="0"><code>$ docker run -it -v demo:/demo alpine
+</code></pre><p>Check the file system, you can see <mark>demo</mark> directory.</p>
+<pre tabindex="0"><code>/ # ls
+bin    demo   dev    etc    home   lib    media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var
+</code></pre><p>Let&rsquo;s change the directory and create a file inside it with some content.</p>
+<pre tabindex="0"><code>/ # cd demo/
+/demo # echo &#34;Hello World!&#34; &gt; demo.txt
+/demo # cat demo.txt
+Hello World!
+</code></pre><p>Exit from alpine container, container will stop running as there is no process running inside it.</p>
+<pre tabindex="0"><code>/demo # exit
+</code></pre><p>Now, let&rsquo;s create another container using Fedora Docker image. Run the fedora docker image.</p>
+<pre tabindex="0"><code>$ docker run -it -v demo:/lets_verify fedora
+</code></pre><p>Check the file system, you can see <mark>lets_verify</mark> directory.</p>
+<pre tabindex="0"><code># ls
+afs  bin  boot  dev  etc  home  lets_verify  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+</code></pre><p>Change the directory to <mark>lets_verify</mark> and check the content of it. We can see the exact same content that we wrote in alpine container. This is the beauty of volumes in container, we can persist data while using containers.</p>
+<pre tabindex="0"><code># cd lets_verify/
+# ls
+demo.txt
+# cat demo.txt
+Hello World!
+</code></pre><p>Exit from the container</p>
+<pre tabindex="0"><code>[root@66ecfcdb8397 lets_verify]# exit
+exit
+</code></pre><p>Additionally, you can manually create volumes and configure permissions. For more details, consult the <a href="https://docs.docker.com/storage/volumes/">official Docker documentation</a>.</p>
+
+          </article>
         </div>
-        
-        <div class="row justify-content-center">
-            <div class="col-auto m-3">
-                
-    <ul class="pagination pagination-default">
-      <li class="page-item">
-        <a href="/tags/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
-      </li>
-      <li class="page-item">
-        <a href="/tags/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
-      </li>
-      <li class="page-item">
-        <a href="/tags/" aria-label="Page 1" class="page-link" role="button">1</a>
-      </li>
-      <li class="page-item active">
-        <a aria-current="page" aria-label="Page 2" class="page-link" role="button">2</a>
-      </li>
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;</span></a>
-      </li>
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="Last" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;&raquo;</span></a>
-      </li>
-    </ul>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-3">
+        <div id="stickySideBar" class="sticky-sidebar">
+          
+          <aside class="toc">
+              <h5>
+                Table Of Contents
+              </h5>
+              <div class="toc-content">
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#why-does-a-container-need-persistent-storage">Why does a Container Need Persistent Storage?</a></li>
+    <li><a href="#how-to-attach-a-volume-to-a-container">How to Attach a Volume to a Container?</a></li>
+  </ul>
+</nav>
+              </div>
+          </aside>
+          
+
+          
+          <aside class="tags">
+            <h5>Tags</h5>
+            <ul class="tags-ul list-unstyled list-inline">
+              
+              <li class="list-inline-item"><a href="https://bindrad.github.io/tags/containers" target="_blank">Containers</a></li>
+              
+              <li class="list-inline-item"><a href="https://bindrad.github.io/tags/docker" target="_blank">Docker</a></li>
+              
+              <li class="list-inline-item"><a href="https://bindrad.github.io/tags/volumes" target="_blank">Volumes</a></li>
+              
+            </ul>
+          </aside>
+          
+
+          
+          <aside class="social">
+            <h5>Social</h5>
+            <div class="social-content">
+              <ul class="list-inline">
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://twitter.com/share?text=From%20Ephemeral%20to%20Everlasting%3a%20Understanding%20Container%20Volumes&url=https%3a%2f%2fbindrad.github.io%2fblogs%2fcontainer-volumes%2f">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://api.whatsapp.com/send?text=From%20Ephemeral%20to%20Everlasting%3a%20Understanding%20Container%20Volumes: https%3a%2f%2fbindrad.github.io%2fblogs%2fcontainer-volumes%2f">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='mailto:?subject=From%20Ephemeral%20to%20Everlasting%3a%20Understanding%20Container%20Volumes&amp;body=Check%20out%20this%20site https%3a%2f%2fbindrad.github.io%2fblogs%2fcontainer-volumes%2f'>
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
             </div>
+          </aside>
+          
         </div>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
+        
+      </div>
+    </div>
+  </div>
+  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
+    <i class="fas fa-angle-up"></i>
+  </button>
+</section>
+
+
+<div class="progress">
+  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
+<Script src="/js/scrollProgressBar.js"></script>
+
+
+<script>
+  var topScroll = document.getElementById("topScroll");
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      topScroll.style.display = "block";
+    } else {
+      topScroll.style.display = "none";
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  
+  let stickySideBarElem = document.getElementById("stickySideBar");
+  let stickyNavBar =  true ;
+  if(stickyNavBar) {
+    let headerElem = document.getElementById("profileHeader");
+    let headerHeight = headerElem.offsetHeight + 15;
+    stickySideBarElem.style.top = headerHeight + "px";
+  } else {
+    stickySideBarElem.style.top = "50px";
+  }
+</script>
+
+
+<script src="/js/readingTime.js"></script>
+
+
 
   </div><footer>
     

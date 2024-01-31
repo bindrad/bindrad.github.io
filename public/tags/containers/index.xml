@@ -6,8 +6,15 @@
     <description>Recent content in Containers on Dhruv Bindra | Software Developer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Jan 2024 00:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jan 2024 00:00:00 -0700</lastBuildDate>
     <atom:link href="https://bindrad.github.io/tags/containers/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>From Ephemeral to Everlasting: Understanding Container Volumes</title>
+      <link>https://bindrad.github.io/blogs/container-volumes/</link>
+      <pubDate>Tue, 30 Jan 2024 00:00:00 -0700</pubDate>
+      <guid>https://bindrad.github.io/blogs/container-volumes/</guid>
+      <description>Containers are small, lightweight bundles containing one or more applications and their dependencies, essential for running code. The beauty of containers lies in their ability to package all necessary components, making applications highly portable.&#xA;Why does a Container Need Persistent Storage? Containers are ephemeral, necessitating a means to store persistent data. While containers carry code, runtime, and dependencies wherever they go, they don&amp;rsquo;t bring along application-generated data to maintain a lightweight footprint.</description>
+    </item>
     <item>
       <title>Exploring Containerization: Unveiling the Core Concepts and Technologies</title>
       <link>https://bindrad.github.io/blogs/containers/</link>
