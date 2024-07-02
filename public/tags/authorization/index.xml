@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authorization on Dhruv Bindra | Software Developer</title>
+    <link>https://bindrad.github.io/tags/authorization/</link>
+    <description>Recent content in Authorization on Dhruv Bindra | Software Developer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 01 Jul 2024 00:00:00 -0700</lastBuildDate>
+    <atom:link href="https://bindrad.github.io/tags/authorization/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Implementing Authentication and Authorization in Go</title>
+      <link>https://bindrad.github.io/blogs/authentication-authorization/</link>
+      <pubDate>Mon, 01 Jul 2024 00:00:00 -0700</pubDate>
+      <guid>https://bindrad.github.io/blogs/authentication-authorization/</guid>
+      <description>When building secure web applications, authentication and authorization are critical components that ensure users have appropriate access to resources. In this blog, we&amp;rsquo;ll explore how to implement both using Go, focusing on practical examples and best practices.&#xA;Authentication vs. Authorization Before diving into the implementation, it&amp;rsquo;s essential to distinguish between authentication and authorization:&#xA;Authentication: Verifies the identity of a user (e.g., logging in with a username and password). Authorization: Determines whether an authenticated user has permission to access specific resources.</description>
+    </item>
+  </channel>
+</rss>

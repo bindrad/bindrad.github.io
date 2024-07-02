@@ -28,14 +28,20 @@
 
 
 
-<meta property="og:title" content="Tags" />
-<meta property="og:description" content="Expore Dhruv Bindra&#39;s portfolio website and discover his passion for innovation" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://bindrad.github.io/tags/" /><meta property="og:site_name" content="Dhruv Bindra | Software Developer" />
+<meta property="og:title" content="Implementing Authentication and Authorization in Go" />
+<meta property="og:description" content="When building secure web applications, authentication and authorization are critical components that ensure users have appropriate access to resources. In this blog, we&rsquo;ll explore how to implement both using Go, focusing on practical examples and best practices.
+Authentication vs. Authorization Before diving into the implementation, it&rsquo;s essential to distinguish between authentication and authorization:
+Authentication: Verifies the identity of a user (e.g., logging in with a username and password). Authorization: Determines whether an authenticated user has permission to access specific resources." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bindrad.github.io/blogs/authentication-authorization/" /><meta property="article:section" content="blogs" />
+<meta property="article:published_time" content="2024-07-01T00:00:00-07:00" />
+<meta property="article:modified_time" content="2024-07-01T00:00:00-07:00" /><meta property="og:site_name" content="Dhruv Bindra | Software Developer" />
 
 
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Tags"/>
-<meta name="twitter:description" content="Expore Dhruv Bindra&#39;s portfolio website and discover his passion for innovation"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Implementing Authentication and Authorization in Go"/>
+<meta name="twitter:description" content="When building secure web applications, authentication and authorization are critical components that ensure users have appropriate access to resources. In this blog, we&rsquo;ll explore how to implement both using Go, focusing on practical examples and best practices.
+Authentication vs. Authorization Before diving into the implementation, it&rsquo;s essential to distinguish between authentication and authorization:
+Authentication: Verifies the identity of a user (e.g., logging in with a username and password). Authorization: Determines whether an authenticated user has permission to access specific resources."/>
 
 
 <link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
@@ -98,11 +104,14 @@
     }
 </style>
 
-<meta name="description" content="Tags of Dhruv Bindra | Software Developer">
-<link rel="stylesheet" href="/css/list.css" media="all">
+<meta name="description" content="">
+<link rel="stylesheet" href="/css/single.css">
+
+
+<script defer src="/fontawesome-6/all-6.4.2.js"></script>
 
   <title>
-Tags | Dhruv Bindra | Software Developer
+Implementing Authentication and Authorization in Go | Dhruv Bindra | Software Developer
 
   </title>
 </head>
@@ -269,103 +278,277 @@ Tags | Dhruv Bindra | Software Developer
     </nav>
 </header>
 <div id="content">
-<div class="container pt-5" id="list-page">
-    <h2 class="text-center pb-2">Tags</h2>
-    <div class="row">
-        
-        <div class="col-lg-4 col-md-6 my-3">
-            <div class="card-columns">
-                <div class="card h-100">
-                    
-                    <div class="card-body bg-transparent p-4 shadow-sm">
-                        <a href="/tags/gemma/" class="primary-font card-title">
-                            <h5 class="card-title bg-transparent" title="Gemma">Gemma</h5>
-                        </a>
-                        <div class="card-text secondary-font">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="mt-auto post-footer bg-transparent py-3">
-                        <span class="float-start bg-transparent">Apr 19, 2024</span>
-                        <a href="/tags/gemma/" class="float-end btn btn-outline-info btn-sm">Read</a>
-                    </div>
-                </div>
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
+          <div class="title mb-5">
+            <h1 class="text-center mb-4">Implementing Authentication and Authorization in Go</h1>
+            <div class="text-center">
+              Dhruv Bindra 
+              <small>|</small>
+              Jul 1, 2024
+
+              
+              <span id="readingTime">
+                 min read
+              </span>
+              
             </div>
-        </div>
+          </div>
+          
+          <div class="featured-image">
+            <img class="img-fluid mx-auto d-block" src="/images/auth-go.jpeg" alt="Implementing Authentication and Authorization in Go">
+          </div>
+          
+          <article class="page-content  p-2">
+          <p>When building secure web applications, authentication and authorization are critical components that ensure users have appropriate access to resources. In this blog, we&rsquo;ll explore how to implement both using Go, focusing on practical examples and best practices.</p>
+<h2 id="authentication-vs-authorization">Authentication vs. Authorization</h2>
+<p>Before diving into the implementation, it&rsquo;s essential to distinguish between authentication and authorization:</p>
+<ul>
+<li>Authentication: Verifies the identity of a user (e.g., logging in with a username and password).</li>
+<li>Authorization: Determines whether an authenticated user has permission to access specific resources.</li>
+</ul>
+<h2 id="setting-up-the-project">Setting Up the Project</h2>
+<p>First, let&rsquo;s set up a basic Go project. We&rsquo;ll use <code>github.com/gin-gonic/gin</code> for the web framework and <code>github.com/golang-jwt/jwt/v4</code> for handling JSON Web Tokens (JWTs).</p>
+<ul>
+<li>Initialize a new Go module:</li>
+</ul>
+<pre tabindex="0"><code>go mod init auth-demo
+go get github.com/gin-gonic/gin
+go get github.com/golang-jwt/jwt/v4
+</code></pre><ul>
+<li>Create the main application file:</li>
+</ul>
+<pre tabindex="0"><code>package main
+
+import (
+    &#34;github.com/gin-gonic/gin&#34;
+    &#34;github.com/golang-jwt/jwt/v4&#34;
+    &#34;net/http&#34;
+    &#34;fmt&#34;
+    &#34;time&#34;
+)
+
+func main() {
+    r := gin.Default()
+    
+    r.POST(&#34;/login&#34;, loginHandler)
+    r.GET(&#34;/secure&#34;, authMiddleware(), secureHandler)
+    
+    r.Run(&#34;:8080&#34;)
+}
+</code></pre><h2 id="implementing-authentication">Implementing Authentication</h2>
+<p>We&rsquo;ll create an endpoint to handle user login. This endpoint will validate user credentials and issue a JWT if successful.</p>
+<pre tabindex="0"><code>func loginHandler(c *gin.Context) {
+    var loginData struct {
+        Username string `json:&#34;username&#34;`
+        Password string `json:&#34;password&#34;`
+    }
+    
+    if err := c.ShouldBindJSON(&amp;loginData); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{&#34;error&#34;: &#34;Invalid request&#34;})
+        return
+    }
+
+    // Replace with your user authentication logic
+    if loginData.Username == &#34;admin&#34; &amp;&amp; loginData.Password == &#34;password&#34; {
+        token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+            &#34;username&#34;: loginData.Username,
+            &#34;role&#34;:     &#34;admin&#34;,
+            &#34;exp&#34;:      time.Now().Add(time.Hour * 72).Unix(),
+        })
         
-        <div class="col-lg-4 col-md-6 my-3">
-            <div class="card-columns">
-                <div class="card h-100">
-                    
-                    <div class="card-body bg-transparent p-4 shadow-sm">
-                        <a href="/tags/lamma3/" class="primary-font card-title">
-                            <h5 class="card-title bg-transparent" title="Lamma3">Lamma3</h5>
-                        </a>
-                        <div class="card-text secondary-font">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="mt-auto post-footer bg-transparent py-3">
-                        <span class="float-start bg-transparent">Apr 19, 2024</span>
-                        <a href="/tags/lamma3/" class="float-end btn btn-outline-info btn-sm">Read</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        tokenString, err := token.SignedString([]byte(&#34;your-secret-key&#34;))
+        if err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{&#34;error&#34;: &#34;Could not generate token&#34;})
+            return
+        }
         
-        <div class="col-lg-4 col-md-6 my-3">
-            <div class="card-columns">
-                <div class="card h-100">
-                    
-                    <div class="card-body bg-transparent p-4 shadow-sm">
-                        <a href="/tags/langchaingo/" class="primary-font card-title">
-                            <h5 class="card-title bg-transparent" title="Langchaingo">Langchaingo</h5>
-                        </a>
-                        <div class="card-text secondary-font">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div class="mt-auto post-footer bg-transparent py-3">
-                        <span class="float-start bg-transparent">Apr 19, 2024</span>
-                        <a href="/tags/langchaingo/" class="float-end btn btn-outline-info btn-sm">Read</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        c.JSON(http.StatusOK, gin.H{&#34;token&#34;: tokenString})
+    } else {
+        c.JSON(http.StatusUnauthorized, gin.H{&#34;error&#34;: &#34;Invalid credentials&#34;})
+    }
+}
+</code></pre><h2 id="implementing-authorization">Implementing Authorization</h2>
+<p>Next, we&rsquo;ll implement middleware to authorize users based on their roles. This middleware will parse the JWT, validate it, and ensure the user has the appropriate role to access the resource.</p>
+<pre tabindex="0"><code>func authMiddleware() gin.HandlerFunc {
+    return func(c *gin.Context) {
+        tokenString := c.GetHeader(&#34;Authorization&#34;)
+        if tokenString == &#34;&#34; {
+            c.AbortWithStatus(http.StatusUnauthorized)
+            return
+        }
         
-        <div class="row justify-content-center">
-            <div class="col-auto m-3">
-                
-    <ul class="pagination pagination-default">
-      <li class="page-item">
-        <a href="/tags/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
-      </li>
-      <li class="page-item">
-        <a href="/tags/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
-      </li>
-      <li class="page-item">
-        <a href="/tags/" aria-label="Page 1" class="page-link" role="button">1</a>
-      </li>
-      <li class="page-item active">
-        <a aria-current="page" aria-label="Page 2" class="page-link" role="button">2</a>
-      </li>
-      <li class="page-item">
-        <a href="/tags/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
-      </li>
-      <li class="page-item">
-        <a href="/tags/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
-      </li>
-      <li class="page-item">
-        <a href="/tags/page/3/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
-      </li>
-      <li class="page-item">
-        <a href="/tags/page/4/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
-      </li>
-    </ul>
-            </div>
+        token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+            if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+                return nil, fmt.Errorf(&#34;unexpected signing method: %v&#34;, token.Header[&#34;alg&#34;])
+            }
+            return []byte(&#34;your-secret-key&#34;), nil
+        })
+        
+        if claims, ok := token.Claims.(jwt.MapClaims); ok &amp;&amp; token.Valid {
+            c.Set(&#34;claims&#34;, claims)
+        } else {
+            c.AbortWithStatus(http.StatusUnauthorized)
+            return
+        }
+        
+        c.Next()
+    }
+}
+
+func secureHandler(c *gin.Context) {
+    claims := c.MustGet(&#34;claims&#34;).(jwt.MapClaims)
+    role := claims[&#34;role&#34;].(string)
+    
+    if role != &#34;admin&#34; {
+        c.AbortWithStatus(http.StatusForbidden)
+        return
+    }
+    
+    c.JSON(http.StatusOK, gin.H{&#34;message&#34;: &#34;Welcome, admin!&#34;})
+}
+</code></pre><h2 id="implementing-role-based-access-control">Implementing Role-Based Access Control</h2>
+<p>For a more advanced authorization system, we&rsquo;ll handle different roles and permissions. The following example checks user roles and permissions before allowing access to an endpoint.</p>
+<pre tabindex="0"><code>func roleBasedAuthMiddleware(requiredRole string) gin.HandlerFunc {
+    return func(c *gin.Context) {
+        claims := c.MustGet(&#34;claims&#34;).(jwt.MapClaims)
+        role := claims[&#34;role&#34;].(string)
+        
+        if role != requiredRole {
+            c.AbortWithStatus(http.StatusForbidden)
+            return
+        }
+        
+        c.Next()
+    }
+}
+
+r.GET(&#34;/admin&#34;, authMiddleware(), roleBasedAuthMiddleware(&#34;admin&#34;), adminHandler)
+</code></pre><h2 id="conclusion">Conclusion</h2>
+<p>Implementing authentication and authorization in Go is straightforward with the help of packages like gin-gonic/gin and github.com/golang-jwt/jwt/v4. By following best practices and properly managing roles and permissions, you can secure your application effectively. Remember to keep your secret keys secure and follow the principle of least privilege when designing your authorization logic.</p>
+<p>By following these steps, you can build a secure and robust authentication and authorization system in your Go applications.</p>
+
+          </article>
         </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-3">
+        <div id="stickySideBar" class="sticky-sidebar">
+          
+          <aside class="toc">
+              <h5>
+                Table Of Contents
+              </h5>
+              <div class="toc-content">
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#authentication-vs-authorization">Authentication vs. Authorization</a></li>
+    <li><a href="#setting-up-the-project">Setting Up the Project</a></li>
+    <li><a href="#implementing-authentication">Implementing Authentication</a></li>
+    <li><a href="#implementing-authorization">Implementing Authorization</a></li>
+    <li><a href="#implementing-role-based-access-control">Implementing Role-Based Access Control</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+              </div>
+          </aside>
+          
+
+          
+          <aside class="tags">
+            <h5>Tags</h5>
+            <ul class="tags-ul list-unstyled list-inline">
+              
+              <li class="list-inline-item"><a href="https://bindrad.github.io/tags/authentication" target="_blank">Authentication</a></li>
+              
+              <li class="list-inline-item"><a href="https://bindrad.github.io/tags/authorization" target="_blank">Authorization</a></li>
+              
+              <li class="list-inline-item"><a href="https://bindrad.github.io/tags/golang" target="_blank">Golang</a></li>
+              
+            </ul>
+          </aside>
+          
+
+          
+          <aside class="social">
+            <h5>Social</h5>
+            <div class="social-content">
+              <ul class="list-inline">
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://twitter.com/share?text=Implementing%20Authentication%20and%20Authorization%20in%20Go&url=https%3a%2f%2fbindrad.github.io%2fblogs%2fauthentication-authorization%2f">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://api.whatsapp.com/send?text=Implementing%20Authentication%20and%20Authorization%20in%20Go: https%3a%2f%2fbindrad.github.io%2fblogs%2fauthentication-authorization%2f">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='mailto:?subject=Implementing%20Authentication%20and%20Authorization%20in%20Go&amp;body=Check%20out%20this%20site https%3a%2f%2fbindrad.github.io%2fblogs%2fauthentication-authorization%2f'>
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+          
+        </div>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
+        
+      </div>
+    </div>
+  </div>
+  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
+    <i class="fas fa-angle-up"></i>
+  </button>
+</section>
+
+
+<div class="progress">
+  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
+<Script src="/js/scrollProgressBar.js"></script>
+
+
+<script>
+  var topScroll = document.getElementById("topScroll");
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      topScroll.style.display = "block";
+    } else {
+      topScroll.style.display = "none";
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  
+  let stickySideBarElem = document.getElementById("stickySideBar");
+  let stickyNavBar =  true ;
+  if(stickyNavBar) {
+    let headerElem = document.getElementById("profileHeader");
+    let headerHeight = headerElem.offsetHeight + 15;
+    stickySideBarElem.style.top = headerHeight + "px";
+  } else {
+    stickySideBarElem.style.top = "50px";
+  }
+</script>
+
+
+<script src="/js/readingTime.js"></script>
+
+
 
   </div><footer>
     
