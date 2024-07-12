@@ -6,8 +6,15 @@
     <description>Recent content on Dhruv Bindra | Software Developer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jul 2024 00:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jul 2024 00:00:00 -0700</lastBuildDate>
     <atom:link href="https://bindrad.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GraphRAG: Revolutionizing Data Insights with Privacy-Preserving AI</title>
+      <link>https://bindrad.github.io/blogs/graphrag/</link>
+      <pubDate>Thu, 11 Jul 2024 00:00:00 -0700</pubDate>
+      <guid>https://bindrad.github.io/blogs/graphrag/</guid>
+      <description>In our data-rich world, extracting meaningful insights from narrative data—like patient records, legal documents, and customer interactions—while preserving privacy is challenging. Microsoft Research&amp;rsquo;s GraphRAG offers a promising solution by integrating graph databases with large language models (LLMs). This approach not only enhances data discovery but also ensures privacy protection.&#xA;The Challenge Narrative data is complex and unstructured, making it tough to analyze. Additionally, this data often contains sensitive information, requiring robust privacy measures.</description>
+    </item>
     <item>
       <title>Implementing Authentication and Authorization in Go</title>
       <link>https://bindrad.github.io/blogs/authentication-authorization/</link>

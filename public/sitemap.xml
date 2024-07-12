@@ -2,25 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://bindrad.github.io/blogs/</loc>
+    <lastmod>2024-07-11T00:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://bindrad.github.io/</loc>
+    <lastmod>2024-07-11T00:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://bindrad.github.io/tags/graphrag/</loc>
+    <lastmod>2024-07-11T00:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://bindrad.github.io/blogs/graphrag/</loc>
+    <lastmod>2024-07-11T00:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://bindrad.github.io/tags/llm/</loc>
+    <lastmod>2024-07-11T00:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://bindrad.github.io/tags/rag/</loc>
+    <lastmod>2024-07-11T00:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://bindrad.github.io/tags/</loc>
+    <lastmod>2024-07-11T00:00:00-07:00</lastmod>
+  </url><url>
     <loc>https://bindrad.github.io/tags/authentication/</loc>
     <lastmod>2024-07-01T00:00:00-07:00</lastmod>
   </url><url>
     <loc>https://bindrad.github.io/tags/authorization/</loc>
     <lastmod>2024-07-01T00:00:00-07:00</lastmod>
   </url><url>
-    <loc>https://bindrad.github.io/blogs/</loc>
-    <lastmod>2024-07-01T00:00:00-07:00</lastmod>
-  </url><url>
-    <loc>https://bindrad.github.io/</loc>
-    <lastmod>2024-07-01T00:00:00-07:00</lastmod>
-  </url><url>
     <loc>https://bindrad.github.io/tags/golang/</loc>
     <lastmod>2024-07-01T00:00:00-07:00</lastmod>
   </url><url>
     <loc>https://bindrad.github.io/blogs/authentication-authorization/</loc>
-    <lastmod>2024-07-01T00:00:00-07:00</lastmod>
-  </url><url>
-    <loc>https://bindrad.github.io/tags/</loc>
     <lastmod>2024-07-01T00:00:00-07:00</lastmod>
   </url><url>
     <loc>https://bindrad.github.io/blogs/ollama-langchain/</loc>
